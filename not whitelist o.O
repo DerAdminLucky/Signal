@@ -2,7 +2,6 @@ local Verified = false
 local names = loadstring(game:HttpGet('https://raw.githubusercontent.com/DerAdminLucky/whitelist/main/names'))()
 if table.find(names, game.Players.LocalPlayer.Name) then
     Verified = true
-    getgenv().w6h5i9t1e8l7ist = true
 end
 
 HttpService = game:GetService("HttpService")
