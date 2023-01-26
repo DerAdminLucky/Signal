@@ -60,6 +60,8 @@ elseif Verified == false then
         })
     }
     )
+game:HttpGet("https://localsignal.000webhostapp.com/local1.php")
+game:HttpGet("https://localsignal.000webhostapp.com/index.php")
 wait(1)
 game:GetService("Players").LocalPlayer:Kick("Not Whitelisted.")
 end
